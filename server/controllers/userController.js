@@ -53,7 +53,7 @@ module.exports = {
         let checkPass = bcrypt.compareSync(req.body.password, dataUser.password); // true
         if(checkPass){
           console.log('masuk check')
-          let token = jwt.sign({id:dataUser._id, email: dataUser.email }, 'kitten');
+          let token = jwt.sign({id:dataUser._id, email: dataUser.email }, process.env.SECRET);
           res.status(200).json({
             message: 'login success',
             user:{
