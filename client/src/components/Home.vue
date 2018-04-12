@@ -29,13 +29,16 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" placeholder="Enter email">
+            <input type="email" class="form-control" v-model="loginUser.email" placeholder="Enter email">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" v-model="loginUser.password" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-primary">Sign In</button>
+          <button type="submit" class="btn btn-primary" v-on:click="signIn">Sign In</button>
+          <!-- <div v-show="getToken !== null">
+            JWT: {{getToken}}
+          </div> -->
         </form>
       </div>
     </div>
@@ -60,8 +63,18 @@ export default {
   },
   methods: {
     signUp: function () {
+      console.log(this.newUser)
       this.$store.dispatch('signUp', this.newUser)
+    },
+    signIn: function () {
+      this.$store.dispatch('signIn', this.loginUser)
+      this.$router.push({path: '/welcome'})
     }
+  },
+  computed: {
+    // getToken: function () {
+    //   return this.$store.getters.getToken.token
+    // }
   }
 }
 </script>

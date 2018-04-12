@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import Swal from 'sweetalert2'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -10,8 +10,13 @@ const store = new Vuex.Store({
       token: localStorage.getItem('token') || ''
     }
   },
+  getters: {
+    getToken: function (state) {
+      return state.activeUser
+    }
+  },
   actions: {
-    singup: function (context, payload) {
+    signUp: function (context, payload) {
       axios({
         method: 'post',
         url: 'http://localhost:3000/users/signup',
@@ -22,10 +27,27 @@ const store = new Vuex.Store({
         }
       }).then(response => {
         console.log(response)
-        alert('signup success!')
-        // location.reload()
+        location.reload()
       }).catch(error => {
         alert('sign up failed!', error)
+      })
+    },
+    signIn: function (context, payload) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/users/signin',
+        data: {
+          email: payload.email,
+          password: payload.password
+        }
+      }).then(response => {
+        console.log(response)
+        Swal(
+          'Welcome!',
+          'Sign In Success!',
+          'success'
+        )
+        localStorage.setItem('token', response.data.user.token)
       })
     }
   }
