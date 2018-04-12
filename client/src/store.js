@@ -30,6 +30,12 @@ const store = new Vuex.Store({
         location.reload()
       }).catch(error => {
         alert('sign up failed!', error)
+        Swal({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href>Why do I have this issue?</a>'
+        })
       })
     },
     signIn: function (context, payload) {

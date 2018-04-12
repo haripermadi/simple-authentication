@@ -10,6 +10,10 @@
             <input type="text" class="form-control" v-model="newUser.name" placeholder="Enter your name...">
           </div>
           <div class="form-group">
+            <!-- <p :class="{ 'control': true }">
+        <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="Email">
+        <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+          </p> -->
             <label for="email">Email address</label>
             <input type="email" class="form-control" v-model="newUser.email" placeholder="Enter your email...">
           </div>
